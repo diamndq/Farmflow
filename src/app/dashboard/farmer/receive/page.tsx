@@ -1,0 +1,120 @@
+"use client";
+
+import { useMemo, useState } from "react";
+import { useOrders } from "../../../../context/OrdersContext";
+import { useAuth } from "../../../../context/AuthContext";
+import QRScannerModal from "../../../../components/QRScannerModal";
+import StatusBadge from "../../../../components/StatusBadge";
+
+export default function FarmerReceivePage() {
+  const { user } = useAuth();
+  const { orders, updateOrder } = useOrders();
+  const order = useMemo(
+    () => orders.find((item) => item.farmer.iin === user?.iin && ["pending", "in_transit"].includes(item.status)),
+    [orders, user?.iin]
+  );
+
+  const [deliveryConfirmed, setDeliveryConfirmed] = useState(false);
+  const [scannedBoxes, setScannedBoxes] = useState<number[]>([]);
+  const [activeBox, setActiveBox] = useState<number | null>(null);
+  const [openModal, setOpenModal] = useState(false);
+  const [completed, setCompleted] = useState(false);
+
+  if (!order) {
+    return (
+      <div className="rounded-[2rem] bg-white p-8 shadow-sm">
+        <p className="text-slate-700">Нет активных заказов для приёмки.</p>
+      </div>
+    );
+  }
+
+  const total = order.product.totalBoxes;
+  const scannedCount = scannedBoxes.length;
+  const canComplete = deliveryConfirmed && scannedCount === total;
+
+  const handleConfirm = (value: string) => {
+    if (activeBox === null) {
+      setDeliveryConfirmed(true);
+      updateOrder(order.id, { status: "receiving" });
+    } else {
+      const nextScans = Array.from(new Set([...scannedBoxes, activeBox]));
+      setScannedBoxes(nextScans);
+      updateOrder(order.id, { status: nextScans.length === total ? "in_use" : "receiving" });
+    }
+    setActiveBox(null);
+    setOpenModal(false);
+  };
+
+  return (
+    <div className="space-y-8">
+      <section className="rounded-[2rem] bg-white p-6 shadow-sm">
+        <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-[0.24em] text-[var(--accent)]">{order.orderNumber}</p>
+            <h2 className="mt-2 text-2xl font-semibold text-slate-900">Приёмка доставки</h2>
+            <p className="mt-2 text-sm text-slate-600">{order.organization} — {order.product.description}</p>
+          </div>
+          <StatusBadge status={order.status} />
+        </div>
+
+        <div className="grid gap-6 lg:grid-cols-[1.2fr_0.8fr]">
+          <div className="rounded-[2rem] border border-slate-200 bg-[var(--bg)] p-6">
+            <div className="mb-6">
+              <h3 className="text-lg font-semibold text-slate-900">Шаг 1: Сканируйте QR доставки</h3>
+              <p className="mt-2 text-sm text-slate-600">После подтверждения QR-кода вы сможете сканировать коробки.</p>
+            </div>
+            <button type="button" onClick={() => { setActiveBox(null); setOpenModal(true); }} className="inline-flex items-center rounded-3xl bg-[var(--primary)] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#163926]">
+              Сканировать QR
+            </button>
+            {deliveryConfirmed && <p className="mt-4 text-sm text-emerald-700">QR подтверждён, продолжайте со сканированием коробок.</p>}
+          </div>
+
+          <div className="rounded-[2rem] border border-slate-200 bg-[var(--bg)] p-6">
+            <h3 className="text-lg font-semibold text-slate-900">Шаг 2: Сканирование коробок</h3>
+            <p className="mt-2 text-sm text-slate-600">Отсканировано {scannedCount} из {total}.</p>
+            <div className="mt-4 rounded-3xl bg-slate-200 p-2">
+              <div className="h-2 rounded-full bg-[var(--accent)] transition-all" style={{ width: `${(scannedCount / total) * 100}%` }} />
+            </div>
+            <div className="mt-6 space-y-3">
+              {Array.from({ length: total }, (_, index) => {
+                const scanned = scannedBoxes.includes(index);
+                return (
+                  <div key={index} className="flex items-center justify-between rounded-3xl border border-slate-200 bg-white px-4 py-3">
+                    <div>
+                      <p className="font-medium text-slate-900">Коробка {index + 1}</p>
+                      <p className="text-sm text-slate-500">{scanned ? "Отсканировано" : "Ожидает сканирования"}</p>
+                    </div>
+                    <button
+                      type="button"
+                      disabled={!deliveryConfirmed || scanned}
+                      onClick={() => {
+                        setActiveBox(index);
+                        setOpenModal(true);
+                      }}
+                      className="rounded-3xl bg-[var(--accent)] px-4 py-2 text-sm font-semibold text-white transition hover:bg-[#3c8f67] disabled:cursor-not-allowed disabled:bg-slate-300"
+                    >
+                      {scanned ? "Готово" : "Сканировать"}
+                    </button>
+                  </div>
+                );
+              })}
+            </div>
+            <button
+              type="button"
+              disabled={!canComplete}
+              onClick={() => {
+                setCompleted(true);
+                updateOrder(order.id, { status: "in_use" });
+              }}
+              className="mt-6 inline-flex w-full items-center justify-center rounded-3xl bg-[var(--primary)] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#163926] disabled:cursor-not-allowed disabled:bg-slate-300"
+            >
+              Завершить приёмку
+            </button>
+            {completed && <p className="mt-4 text-sm text-emerald-700">Приёмка завершена, коробки приняты.</p>}
+          </div>
+        </div>
+      </section>
+      <QRScannerModal open={openModal} onClose={() => setOpenModal(false)} onConfirm={handleConfirm} />
+    </div>
+  );
+}
