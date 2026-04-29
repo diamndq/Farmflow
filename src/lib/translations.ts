@@ -1,6 +1,6 @@
 export const t = {
   ru: {
-    appName: "AgriTrack SKO",
+    appName: "FarmFlow",
     login: "Войти",
     logout: "Выйти",
     iin: "ИИН",
@@ -59,7 +59,7 @@ export const t = {
     },
   },
   kz: {
-    appName: "AgriTrack СҚО",
+    appName: "FarmFlow",
     login: "Кіру",
     logout: "Шығу",
     iin: "ЖСН",

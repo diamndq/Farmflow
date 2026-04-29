@@ -5,8 +5,8 @@ import { OrdersProvider } from "../context/OrdersContext";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "AgriTrack SKO",
-  description: "AgriTrack SKO — аграрная логистика Северного Казахстана",
+  title: "FarmFlow",
+  description: "FarmFlow — аграрная логистика Северного Казахстана",
 };
 
 export default function RootLayout({

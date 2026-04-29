@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, Fragment } from "react";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { useAuth } from "../../../../context/AuthContext";
 import { useOrders } from "../../../../context/OrdersContext";
@@ -16,12 +16,62 @@ export default function FarmerHistoryPage() {
 
   return (
     <div className="space-y-8">
-      <section className="rounded-[2rem] bg-white p-6 shadow-sm">
+      <section className="mx-4 rounded-[2rem] bg-white p-6 shadow-sm md:mx-0">
         <div className="mb-6">
           <p className="text-sm font-semibold uppercase tracking-[0.24em] text-[var(--accent)]">История</p>
-          <h1 className="mt-2 text-3xl font-semibold text-slate-900">Архив партий</h1>
+          <h1 className="mt-2 text-2xl font-semibold text-slate-900 md:text-3xl">Архив партий</h1>
         </div>
-        <div className="overflow-hidden rounded-[2rem] border border-slate-200">
+
+        <div className="space-y-4 md:hidden">
+          {historyOrders.map((order) => (
+            <div key={order.id} className="rounded-3xl border border-slate-200 bg-white p-4 shadow-sm">
+              <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                <div>
+                  <p className="text-sm font-semibold text-slate-900">{order.orderNumber}</p>
+                  <p className="text-sm text-slate-500">{order.product.name}</p>
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="text-sm text-slate-500">{formatDate(order.createdAt)}</span>
+                  <StatusBadge status={order.status} />
+                </div>
+              </div>
+              <div className="mt-4 grid gap-2 text-sm text-slate-600">
+                <div className="flex items-center justify-between rounded-3xl bg-surface px-3 py-3">
+                  <span>Коробок</span>
+                  <span>{order.product.totalBoxes}</span>
+                </div>
+                <div className="flex items-center justify-between rounded-3xl bg-surface px-3 py-3">
+                  <span>Описание</span>
+                  <span className="max-w-[60%] truncate text-right">{order.product.description}</span>
+                </div>
+              </div>
+              <button
+                type="button"
+                onClick={() => setExpandedId(expandedId === order.id ? null : order.id)}
+                className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-3xl border border-slate-200 bg-white px-4 py-3 text-sm font-medium text-slate-700 transition hover:bg-slate-50"
+              >
+                {expandedId === order.id ? "Скрыть" : "Показать"}
+                {expandedId === order.id ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
+              </button>
+              {expandedId === order.id && (
+                <div className="mt-4 rounded-3xl border border-slate-200 bg-surface p-4">
+                  <p className="text-sm text-slate-700">Описание: {order.product.description}</p>
+                  <div className="mt-4 grid gap-3">
+                    {Array.from({ length: order.product.totalBoxes }, (_, index) => (
+                      <div key={index} className="rounded-3xl border border-slate-200 bg-white p-4 text-sm">
+                        <p className="font-semibold text-slate-900">Коробка {index + 1}</p>
+                        <p className="mt-2 text-slate-600">Статус: {order.status}</p>
+                        <p className="mt-1 text-slate-500">Отсканирована: {formatDate(order.createdAt)}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+
+        <div className="overflow-hidden rounded-[2rem] border border-slate-200 md:block hidden">
           <table className="min-w-full divide-y divide-slate-200 text-left text-sm">
             <thead className="bg-surface text-slate-600">
               <tr>
@@ -35,8 +85,8 @@ export default function FarmerHistoryPage() {
             </thead>
             <tbody className="divide-y divide-slate-200 bg-white">
               {historyOrders.map((order) => (
-                <>
-                  <tr key={order.id} className="hover:bg-slate-50">
+                <Fragment key={order.id}>
+                  <tr className="hover:bg-slate-50">
                     <td className="px-6 py-4 font-semibold text-slate-900">{order.orderNumber}</td>
                     <td className="px-6 py-4">{order.product.name}</td>
                     <td className="px-6 py-4">{formatDate(order.createdAt)}</td>
@@ -71,7 +121,7 @@ export default function FarmerHistoryPage() {
                       </td>
                     </tr>
                   )}
-                </>
+                </Fragment>
               ))}
             </tbody>
           </table>

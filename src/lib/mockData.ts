@@ -1,3 +1,5 @@
+// lib/mockData.ts
+
 export type AppRole = "admin" | "farmer" | "driver" | "user";
 
 export type User = {
@@ -5,6 +7,29 @@ export type User = {
   name: string;
   role: AppRole;
   phone: string;
+};
+
+// ДОБАВЛЯЕМ новые типы
+export type DeliveryQR = {
+  value: string;
+  imageUrl: string;
+};
+
+export type Package = {
+  id: string;
+  label: string;
+  qrValue: string;
+  imageUrl: string;
+  isUsed: boolean;
+  usedAt: string | null;
+};
+
+export type Box = {
+  id: string;
+  label: string;
+  barcode: string;
+  imageUrl: string;
+  isScanned: boolean;
 };
 
 export type Order = {
@@ -16,6 +41,10 @@ export type Order = {
   product: { name: string; description: string; totalBoxes: number };
   status: string;
   createdAt: string;
+  // ДОБАВЛЯЕМ три новых поля
+  deliveryQR: DeliveryQR;
+  packages: Package[];
+  boxes: Box[];
 };
 
 export type NotificationItem = {
@@ -48,6 +77,28 @@ export const MOCK_ORDERS: Order[] = [
     product: { name: "Минеральные удобрения", description: "Азофоска NPK 16-16-16", totalBoxes: 4 },
     status: "in_transit",
     createdAt: "2024-11-01",
+
+    // QR который водитель показывает фермеру
+    deliveryQR: {
+      value: "farmflow-qr-delivery-001",
+      imageUrl: "/codes/qr-delivery-001.png",
+    },
+
+    // 4 QR внутри упаковок — фермер сканирует при использовании
+    packages: [
+      { id: "pkg-1", label: "Упаковка 1", qrValue: "farmflow-qr-package-001", imageUrl: "/codes/qr-package-001.png", isUsed: false, usedAt: null },
+      { id: "pkg-2", label: "Упаковка 2", qrValue: "farmflow-qr-package-002", imageUrl: "/codes/qr-package-002.png", isUsed: false, usedAt: null },
+      { id: "pkg-3", label: "Упаковка 3", qrValue: "farmflow-qr-package-003", imageUrl: "/codes/qr-package-003.png", isUsed: false, usedAt: null },
+      { id: "pkg-4", label: "Упаковка 4", qrValue: "farmflow-qr-package-004", imageUrl: "/codes/qr-package-004.png", isUsed: false, usedAt: null },
+    ],
+
+    // штрихкоды на коробках — фермер сканирует при приёмке
+    boxes: [
+      { id: "box-1", label: "Коробка 1", barcode: "FF-BOX-001", imageUrl: "/codes/barcode-box-001.png", isScanned: false },
+      { id: "box-2", label: "Коробка 2", barcode: "FF-BOX-002", imageUrl: "/codes/barcode-box-002.png", isScanned: false },
+      { id: "box-3", label: "Коробка 3", barcode: "FF-BOX-003", imageUrl: "/codes/barcode-box-003.png", isScanned: false },
+      { id: "box-4", label: "Коробка 4", barcode: "FF-BOX-004", imageUrl: "/codes/barcode-box-004.png", isScanned: false },
+    ],
   },
   {
     id: "order-002",
@@ -58,6 +109,15 @@ export const MOCK_ORDERS: Order[] = [
     product: { name: "Семена пшеницы", description: "Сорт Астана-2, элита", totalBoxes: 2 },
     status: "pending",
     createdAt: "2024-11-02",
+    deliveryQR: { value: "farmflow-qr-delivery-001", imageUrl: "/codes/qr-delivery-001.png" },
+    packages: [
+      { id: "pkg-1", label: "Упаковка 1", qrValue: "farmflow-qr-package-001", imageUrl: "/codes/qr-package-001.png", isUsed: false, usedAt: null },
+      { id: "pkg-2", label: "Упаковка 2", qrValue: "farmflow-qr-package-002", imageUrl: "/codes/qr-package-002.png", isUsed: false, usedAt: null },
+    ],
+    boxes: [
+      { id: "box-1", label: "Коробка 1", barcode: "FF-BOX-001", imageUrl: "/codes/barcode-box-001.png", isScanned: false },
+      { id: "box-2", label: "Коробка 2", barcode: "FF-BOX-002", imageUrl: "/codes/barcode-box-002.png", isScanned: false },
+    ],
   },
   {
     id: "order-003",
@@ -68,6 +128,17 @@ export const MOCK_ORDERS: Order[] = [
     product: { name: "Средства защиты растений", description: "Гербицид Примадонна", totalBoxes: 3 },
     status: "delivered",
     createdAt: "2024-10-28",
+    deliveryQR: { value: "farmflow-qr-delivery-001", imageUrl: "/codes/qr-delivery-001.png" },
+    packages: [
+      { id: "pkg-1", label: "Упаковка 1", qrValue: "farmflow-qr-package-001", imageUrl: "/codes/qr-package-001.png", isUsed: false, usedAt: null },
+      { id: "pkg-2", label: "Упаковка 2", qrValue: "farmflow-qr-package-002", imageUrl: "/codes/qr-package-002.png", isUsed: false, usedAt: null },
+      { id: "pkg-3", label: "Упаковка 3", qrValue: "farmflow-qr-package-003", imageUrl: "/codes/qr-package-003.png", isUsed: false, usedAt: null },
+    ],
+    boxes: [
+      { id: "box-1", label: "Коробка 1", barcode: "FF-BOX-001", imageUrl: "/codes/barcode-box-001.png", isScanned: false },
+      { id: "box-2", label: "Коробка 2", barcode: "FF-BOX-002", imageUrl: "/codes/barcode-box-002.png", isScanned: false },
+      { id: "box-3", label: "Коробка 3", barcode: "FF-BOX-003", imageUrl: "/codes/barcode-box-003.png", isScanned: false },
+    ],
   },
 ];
 

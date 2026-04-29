@@ -18,7 +18,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [users, setUsers] = useState<User[]>(MOCK_USERS);
 
   useEffect(() => {
-    const stored = window.localStorage.getItem("agritrack-user");
+    const stored = window.localStorage.getItem("farmflow-user");
     if (stored) {
       setUser(JSON.parse(stored));
     }
@@ -26,9 +26,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     if (user) {
-      window.localStorage.setItem("agritrack-user", JSON.stringify(user));
+      window.localStorage.setItem("farmflow-user", JSON.stringify(user));
     } else {
-      window.localStorage.removeItem("agritrack-user");
+      window.localStorage.removeItem("farmflow-user");
     }
   }, [user]);
 

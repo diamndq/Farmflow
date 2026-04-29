@@ -63,13 +63,20 @@ export default function DriverDeliveryPage() {
               Я прибыл
             </button>
             {arrived && (
-              <div className="mt-6 rounded-[2rem] border border-slate-200 bg-white p-6 text-center">
-                <div className="mx-auto mb-4 flex h-48 w-48 items-center justify-center rounded-3xl border border-slate-200 bg-slate-950 text-3xl font-bold text-white">
-                  QR
-                </div>
-                <p className="text-sm text-slate-600">Покажите этот QR-код фермеру</p>
+            <div className="mt-6 rounded-[2rem] border border-slate-200 bg-white p-6 text-center">
+              <img
+              src={order.deliveryQR.imageUrl}
+              alt="QR код доставки"
+              className="mx-auto mb-4 h-48 w-48 rounded-3xl border-4 border-[var(--primary)] object-contain p-2"
+              />
+              <p className="text-sm font-medium text-slate-700">
+               Покажите этот QR-код фермеру
+               </p>
+              <p className="mt-1 text-xs text-slate-400">
+                {order.deliveryQR.value}
+              </p>
               </div>
-            )}
+              )}
           </div>
         </div>
       </section>

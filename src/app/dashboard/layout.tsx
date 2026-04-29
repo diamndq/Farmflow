@@ -9,6 +9,7 @@ import { useAuth } from "../../context/AuthContext";
 
 const pageTitles: Record<string, string> = {
   "/dashboard/admin": "Админская панель",
+  "/dashboard/admin/orders": "Заказы",
   "/dashboard/admin/orders/new": "Создать заказ",
   "/dashboard/farmer": "Фермерская панель",
   "/dashboard/farmer/receive": "Приёмка заказа",
@@ -41,10 +42,12 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
   return (
     <div className="min-h-screen bg-[var(--bg)] text-[var(--text)]">
       <Header title={title} />
-      <div className="mx-auto flex min-h-[calc(100vh-88px)] max-w-7xl gap-6 px-4 py-6 sm:px-6 lg:px-8">
-        <Sidebar role={user.role} />
+      <div className="flex">
+        <Sidebar role={user.role} user={user} />
         <main className="flex-1 pb-28 lg:pb-0">
-          {children}
+          <div className="mx-auto max-w-5xl px-4 py-6 md:px-6">
+            {children}
+          </div>
         </main>
       </div>
       <BottomNav role={user.role} />

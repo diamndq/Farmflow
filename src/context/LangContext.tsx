@@ -18,14 +18,14 @@ export function LangProvider({ children }: { children: React.ReactNode }) {
   const [lang, setLangState] = useState<Lang>("ru");
 
   useEffect(() => {
-    const stored = window.localStorage.getItem("agritrack-lang");
+    const stored = window.localStorage.getItem("farmflow-lang");
     if (stored === "kz" || stored === "ru") {
       setLangState(stored);
     }
   }, []);
 
   useEffect(() => {
-    window.localStorage.setItem("agritrack-lang", lang);
+    window.localStorage.setItem("farmflow-lang", lang);
   }, [lang]);
 
   const value = useMemo(
