@@ -61,6 +61,9 @@ export default function Header({ title }: HeaderProps) {
           </div>
 
           <div className="flex items-center gap-3">
+            <Link href={"/dashboard/map"} className="text-base font-semibold tracking-tight text-[var(--text)] sm:text-lg">
+              Map
+            </Link>
             <LanguageSwitcher />
             <NotificationBell />
             <div className="hidden sm:flex items-center gap-3 rounded-3xl border border-slate-200 bg-surface px-4 py-2 shadow-sm">
