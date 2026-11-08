@@ -14,11 +14,11 @@ export default function DriverDashboardPage() {
 
   return (
     <div className="space-y-8">
-      <section className="rounded-[2rem] bg-white p-6 shadow-sm">
+      <section className="rounded-3xl bg-white p-4 shadow-sm sm:rounded-[2rem] sm:p-6">
         <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <p className="text-sm font-semibold uppercase tracking-[0.24em] text-[var(--accent)]">Водитель</p>
-            <h1 className="mt-2 text-3xl font-semibold text-slate-900">Назначенные маршруты</h1>
+            <h1 className="mt-2 text-2xl font-semibold text-slate-900 sm:text-3xl">Назначенные маршруты</h1>
           </div>
         </div>
         <div className="grid gap-5 md:grid-cols-2">

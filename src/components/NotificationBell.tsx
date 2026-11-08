@@ -17,6 +17,8 @@ export default function NotificationBell() {
       <button
         type="button"
         onClick={() => setOpen((state) => !state)}
+        aria-label={t.notifications}
+        aria-expanded={open}
         className="relative inline-flex h-11 w-11 items-center justify-center rounded-2xl border border-slate-200 bg-white text-slate-700 transition hover:border-slate-300 hover:bg-slate-50"
       >
         <Bell className="h-5 w-5" />
@@ -26,7 +28,7 @@ export default function NotificationBell() {
       </button>
 
       {open && (
-        <div className="absolute right-0 mt-3 w-80 rounded-3xl border border-slate-200 bg-white p-4 shadow-[0_20px_60px_rgba(15,23,42,0.12)]">
+        <div className="absolute right-0 z-50 mt-3 max-h-[min(70dvh,32rem)] w-[min(20rem,calc(100vw-1.5rem))] overflow-y-auto rounded-3xl border border-slate-200 bg-white p-4 shadow-[0_20px_60px_rgba(15,23,42,0.12)]">
           <div className="flex items-center justify-between gap-3 pb-3">
             <div className="text-sm font-semibold text-slate-900">{t.notifications}</div>
             <button type="button" onClick={() => setOpen(false)} className="rounded-full p-2 text-slate-500 transition hover:bg-slate-100 hover:text-slate-900">

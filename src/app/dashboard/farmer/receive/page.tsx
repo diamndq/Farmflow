@@ -50,7 +50,7 @@ const order = useMemo(
 
   return (
     <div className="space-y-8">
-      <section className="rounded-[2rem] bg-white p-6 shadow-sm">
+      <section className="rounded-3xl bg-white p-4 shadow-sm sm:rounded-[2rem] sm:p-6">
         <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <p className="text-sm font-semibold uppercase tracking-[0.24em] text-[var(--accent)]">
@@ -67,7 +67,7 @@ const order = useMemo(
         <div className="grid gap-6 lg:grid-cols-[1.2fr_0.8fr]">
 
           {/* ШАГ 1 — QR доставки */}
-          <div className="rounded-[2rem] border border-slate-200 bg-[var(--bg)] p-6">
+          <div className="rounded-3xl border border-slate-200 bg-[var(--bg)] p-4 sm:rounded-[2rem] sm:p-6">
             <div className="mb-6">
               <h3 className="text-lg font-semibold text-slate-900">
                 Шаг 1: Сканируйте QR доставки
@@ -96,7 +96,7 @@ const order = useMemo(
           </div>
 
           {/* ШАГ 2 — Штрихкоды коробок */}
-          <div className="rounded-[2rem] border border-slate-200 bg-[var(--bg)] p-6">
+          <div className="rounded-3xl border border-slate-200 bg-[var(--bg)] p-4 sm:rounded-[2rem] sm:p-6">
             <h3 className="text-lg font-semibold text-slate-900">
               Шаг 2: Сканирование коробок
             </h3>
@@ -119,15 +119,15 @@ const order = useMemo(
                 return (
                   <div
                     key={box.id}
-                    className="flex items-center justify-between rounded-3xl border border-slate-200 bg-white px-4 py-3"
+                    className="flex min-w-0 items-center justify-between gap-2 rounded-2xl border border-slate-200 bg-white px-3 py-3 sm:rounded-3xl sm:px-4"
                   >
-                    <div className="flex items-center gap-3">
+                    <div className="flex min-w-0 items-center gap-2 sm:gap-3">
                       <img
                         src={box.imageUrl}
                         alt={box.label}
                         className="h-8 w-16 object-contain"
                       />
-                      <div>
+                      <div className="min-w-0">
                         <p className="text-sm font-medium text-slate-900">{box.label}</p>
                         <p className="text-xs text-slate-400">{box.barcode}</p>
                       </div>
@@ -145,7 +145,7 @@ const order = useMemo(
                           setActiveBox(index);
                           setOpenModal(true);
                         }}
-                        className="rounded-3xl bg-[var(--accent)] px-4 py-2 text-xs font-semibold text-white transition hover:bg-[#3c8f67] disabled:cursor-not-allowed disabled:bg-slate-300"
+                        className="min-h-10 shrink-0 rounded-2xl bg-[var(--accent)] px-3 py-2 text-xs font-semibold text-white transition hover:bg-[#3c8f67] disabled:cursor-not-allowed disabled:bg-slate-300 sm:px-4"
                       >
                         Скан
                       </button>

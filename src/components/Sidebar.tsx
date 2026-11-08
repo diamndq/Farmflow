@@ -1,28 +1,31 @@
 "use client";
 
 import Link from "next/link";
-import { ClipboardList, Layers, PackageCheck, Package, Truck, Users } from "lucide-react";
+import { ClipboardList, Layers, MapPinned, PackageCheck, Package, Truck, Users } from "lucide-react";
 import { usePathname } from "next/navigation";
-import { useLang } from "../context/LangContext";
-import { AppRole } from "../lib/mockData";
+import type { AppRole } from "../lib/mockData";
 
-const navItems: Record<AppRole, Array<{ label: string; href: string; icon: React.ComponentType<any> }>> = {
+const navItems: Record<AppRole, Array<{ label: string; href: string; icon: typeof Layers }>> = {
   admin: [
     { label: "Панель", href: "/dashboard/admin", icon: Layers },
     { label: "Заказы", href: "/dashboard/admin/orders", icon: ClipboardList },
     { label: "Новый заказ", href: "/dashboard/admin/orders/new", icon: Package },
+    { label: "Карта", href: "/dashboard/map", icon: MapPinned },
   ],
   farmer: [
     { label: "Панель", href: "/dashboard/farmer", icon: Package },
     { label: "Приёмка", href: "/dashboard/farmer/receive", icon: PackageCheck },
     { label: "Использование", href: "/dashboard/farmer/usage", icon: Truck },
     { label: "История", href: "/dashboard/farmer/history", icon: Users },
+    { label: "Карта", href: "/dashboard/map", icon: MapPinned },
   ],
   driver: [
     { label: "Панель", href: "/dashboard/driver", icon: Package },
+    { label: "Карта", href: "/dashboard/map", icon: MapPinned },
   ],
   user: [
     { label: "Мониторинг", href: "/dashboard/user", icon: ClipboardList },
+    { label: "Карта", href: "/dashboard/map", icon: MapPinned },
   ],
 };
 
@@ -32,7 +35,6 @@ type SidebarProps = {
 };
 
 export default function Sidebar({ role, user }: SidebarProps) {
-  const { lang } = useLang();
   const pathname = usePathname();
 
   if (!role) return null;

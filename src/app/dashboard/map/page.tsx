@@ -13,8 +13,8 @@ const NDVIMap = dynamic(() => import("../../../components/NDVIMap"), {
 
 export default function MapPage() {
   return (
-    <main className="p-6">
-      <h1 className="text-xl font-bold mb-4">Мониторинг NDVI</h1>
+    <main className="p-3 sm:p-6">
+      <h1 className="mb-4 text-xl font-bold">Мониторинг NDVI</h1>
       <NDVIMap />
     </main>
   );

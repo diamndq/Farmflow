@@ -70,15 +70,15 @@ export default function NewOrderPage() {
 
   return (
     <div className="space-y-8">
-      <section className="mx-4 rounded-4xl bg-white p-6 shadow-sm md:mx-0">
+      <section className="min-w-0 rounded-3xl bg-white p-4 shadow-sm sm:rounded-4xl sm:p-6">
         <div className="mb-6">
           <p className="text-sm font-semibold uppercase tracking-[0.24em] text-(--accent)">Создать заказ</p>
           <h2 className="mt-2 text-xl font-semibold text-slate-900 md:text-2xl">Новый маршрут для логистики</h2>
         </div>
-        <form onSubmit={handleSubmit} className="grid gap-6 md:grid-cols-2">
+        <form onSubmit={handleSubmit} className="grid gap-4 sm:gap-6 md:grid-cols-2">
           <label className="block">
             <span className="text-sm font-medium text-slate-700">Фермер</span>
-            <select value={farmerIin} onChange={(event) => setFarmerIin(event.target.value)} className="mt-2 w-full min-h-11 rounded-3xl border border-slate-200 bg-surface px-4 py-3 text-slate-900 outline-none transition focus:border-(--accent)">
+            <select value={farmerIin} onChange={(event) => setFarmerIin(event.target.value)} className="mt-2 min-h-12 w-full rounded-2xl border border-slate-200 bg-surface px-4 py-3 text-slate-900 outline-none transition focus:border-(--accent)">
               <option value="">Выберите фермера</option>
               {farmers.map((farmer) => (
                 <option key={farmer.iin} value={farmer.iin}>{farmer.name}</option>
@@ -87,7 +87,7 @@ export default function NewOrderPage() {
           </label>
           <label className="block">
             <span className="text-sm font-medium text-slate-700">Водитель</span>
-            <select value={driverIin} onChange={(event) => setDriverIin(event.target.value)} className="mt-2 w-full min-h-11 rounded-3xl border border-slate-200 bg-surface px-4 py-3 text-slate-900 outline-none transition focus:border-(--accent)">
+            <select value={driverIin} onChange={(event) => setDriverIin(event.target.value)} className="mt-2 min-h-12 w-full rounded-2xl border border-slate-200 bg-surface px-4 py-3 text-slate-900 outline-none transition focus:border-(--accent)">
               <option value="">Выберите водителя</option>
               {drivers.map((driver) => (
                 <option key={driver.iin} value={driver.iin}>{driver.name}</option>
@@ -96,22 +96,22 @@ export default function NewOrderPage() {
           </label>
           <label className="block md:col-span-2">
             <span className="text-sm font-medium text-slate-700">Организация</span>
-            <input value={organization} onChange={(event) => setOrganization(event.target.value)} className="mt-2 w-full min-h-11 rounded-3xl border border-slate-200 bg-surface px-4 py-3 text-slate-900 outline-none transition focus:border-(--accent)" />
+            <input value={organization} onChange={(event) => setOrganization(event.target.value)} className="mt-2 min-h-12 w-full rounded-2xl border border-slate-200 bg-surface px-4 py-3 text-slate-900 outline-none transition focus:border-(--accent)" />
           </label>
           <label className="block">
             <span className="text-sm font-medium text-slate-700">Продукт</span>
-            <input value={productName} onChange={(event) => setProductName(event.target.value)} className="mt-2 w-full min-h-11 rounded-3xl border border-slate-200 bg-surface px-4 py-3 text-slate-900 outline-none transition focus:border-(--accent)" />
+            <input value={productName} onChange={(event) => setProductName(event.target.value)} className="mt-2 min-h-12 w-full rounded-2xl border border-slate-200 bg-surface px-4 py-3 text-slate-900 outline-none transition focus:border-(--accent)" />
           </label>
           <label className="block">
             <span className="text-sm font-medium text-slate-700">Описание</span>
-            <input value={description} onChange={(event) => setDescription(event.target.value)} className="mt-2 w-full min-h-11 rounded-3xl border border-slate-200 bg-surface px-4 py-3 text-slate-900 outline-none transition focus:border-(--accent)" />
+            <input value={description} onChange={(event) => setDescription(event.target.value)} className="mt-2 min-h-12 w-full rounded-2xl border border-slate-200 bg-surface px-4 py-3 text-slate-900 outline-none transition focus:border-(--accent)" />
           </label>
           <label className="block">
             <span className="text-sm font-medium text-slate-700">Количество коробок</span>
-            <input type="number" min={1} value={boxes} onChange={(event) => setBoxes(Number(event.target.value))} className="mt-2 w-full min-h-11 rounded-3xl border border-slate-200 bg-surface px-4 py-3 text-slate-900 outline-none transition focus:border-(--accent)" />
+            <input type="number" min={1} value={boxes} onChange={(event) => setBoxes(Number(event.target.value))} className="mt-2 min-h-12 w-full rounded-2xl border border-slate-200 bg-surface px-4 py-3 text-slate-900 outline-none transition focus:border-(--accent)" />
           </label>
           <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between md:col-span-2">
-            <button type="submit" className="inline-flex min-h-11 items-center justify-center rounded-3xl bg-(--primary) px-6 py-3 text-sm font-semibold text-white transition hover:bg-[#163926]">
+            <button type="submit" className="inline-flex min-h-12 w-full items-center justify-center rounded-2xl bg-(--primary) px-6 py-3 text-sm font-semibold text-white transition hover:bg-[#163926] sm:w-auto">
               Создать заказ
             </button>
             {success && <span className="text-sm text-emerald-700">Заказ создан, перенаправление...</span>}

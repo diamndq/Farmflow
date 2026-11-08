@@ -24,10 +24,10 @@ export default function UserPage() {
 
   return (
     <div className="space-y-8">
-      <section className="rounded-[2rem] bg-white p-6 shadow-sm">
+      <section className="rounded-3xl bg-white p-4 shadow-sm sm:rounded-[2rem] sm:p-6">
         <div className="mb-6">
           <p className="text-sm font-semibold uppercase tracking-[0.24em] text-[var(--accent)]">Мониторинг</p>
-          <h1 className="mt-2 text-3xl font-semibold text-slate-900">Мониторинг аграрных партий — Северный Казахстан</h1>
+          <h1 className="mt-2 text-2xl font-semibold text-slate-900 sm:text-3xl">Мониторинг аграрных партий — Северный Казахстан</h1>
         </div>
         <div className="mb-6 flex flex-wrap gap-3">
           {filterOptions.map((option) => (
@@ -43,7 +43,7 @@ export default function UserPage() {
 
         <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
           {filteredOrders.map((order) => (
-            <div key={order.id} className="rounded-[2rem] border border-slate-200 bg-surface p-6 shadow-sm">
+            <div key={order.id} className="min-w-0 rounded-3xl border border-slate-200 bg-surface p-4 shadow-sm sm:rounded-[2rem] sm:p-6">
               <div className="flex items-center justify-between gap-3">
                 <div>
                   <p className="text-sm font-semibold text-slate-900">{order.orderNumber}</p>

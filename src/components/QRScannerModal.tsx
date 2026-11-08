@@ -127,8 +127,8 @@ const handleSimulate = async () => {
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 modal-backdrop md:p-4">
-      <div className="relative h-full w-full rounded-none bg-white md:relative md:h-auto md:max-w-md md:rounded-3xl md:border md:border-slate-200 md:shadow-xl">
+    <div className="modal-backdrop fixed inset-0 z-50 flex items-stretch justify-center p-0 sm:items-center sm:p-4">
+      <div className="relative flex h-dvh w-full flex-col overflow-y-auto overscroll-contain bg-white pb-[env(safe-area-inset-bottom)] sm:h-auto sm:max-h-[calc(100dvh-2rem)] sm:max-w-md sm:rounded-3xl sm:border sm:border-slate-200 sm:shadow-xl">
 
         {/* Закрыть */}
         <button
@@ -140,7 +140,7 @@ const handleSimulate = async () => {
         </button>
 
         {/* Заголовок */}
-        <div className="p-6 pb-5 md:pb-5">
+        <div className="p-4 pb-3 sm:p-6 sm:pb-5">
           <div className="mb-5 flex items-center gap-3">
             <div className="flex h-12 w-12 items-center justify-center rounded-3xl bg-(--accent)/15 text-(--primary)">
               <Camera className="h-5 w-5" />
@@ -184,14 +184,14 @@ const handleSimulate = async () => {
 
         {/* Вкладка камеры */}
         {tab === "cam" && (
-          <div className="flex flex-1 flex-col items-center gap-4 px-6 pb-6 md:flex-none">
+          <div className="flex min-h-0 flex-1 flex-col items-center gap-4 px-4 pb-4 sm:px-6 sm:pb-6">
             {/* Контейнер для видео — html5-qrcode*/}
-            <div className="relative flex-1 w-full overflow-hidden rounded-4xl md:h-52">
-              <div id="farmflow-qr-reader" className="h-full w-full md:h-auto" />
+            <div className="relative min-h-56 w-full flex-1 overflow-hidden rounded-3xl sm:min-h-0 sm:h-52 sm:flex-none">
+              <div id="farmflow-qr-reader" className="h-full w-full" />
               {/* Зелёные уголки поверх видео */}
               {scannerStarted && (
                 <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
-                  <div className="relative h-full w-full md:h-52 md:w-52">
+                  <div className="relative h-full w-full sm:h-52 sm:w-52">
                     <span className="absolute left-0 top-0 h-8 w-8 rounded-tl-xl border-l-4 border-t-4 border-(--accent)" />
                     <span className="absolute right-0 top-0 h-8 w-8 rounded-tr-xl border-r-4 border-t-4 border-(--accent)" />
                     <span className="absolute bottom-0 left-0 h-8 w-8 rounded-bl-xl border-b-4 border-l-4 border-(--accent)" />
@@ -225,7 +225,7 @@ const handleSimulate = async () => {
 
         {/* Вкладка ручного ввода */}
         {tab === "manual" && (
-          <div className="flex flex-col gap-3 px-6 pb-6">
+          <div className="flex flex-col gap-3 px-4 pb-4 sm:px-6 sm:pb-6">
             <input
               value={input}
               onChange={(e) => setInput(e.target.value)}

@@ -44,8 +44,8 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
       <Header title={title} />
       <div className="flex">
         <Sidebar role={user.role} user={user} />
-        <main className="flex-1 pb-28 lg:pb-0">
-          <div className="mx-auto max-w-5xl px-4 py-6 md:px-6">
+        <main className="min-w-0 flex-1 pb-[calc(5rem+env(safe-area-inset-bottom))] md:pb-0">
+          <div className="mx-auto max-w-5xl px-3 py-4 sm:px-6 sm:py-6">
             {children}
           </div>
         </main>

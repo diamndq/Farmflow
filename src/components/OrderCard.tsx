@@ -12,17 +12,17 @@ type OrderCardProps = {
 
 export default function OrderCard({ order, actionLabel, onAction }: OrderCardProps) {
   return (
-    <div className="rounded-3xl border border-slate-200 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md">
+    <div className="min-w-0 rounded-3xl border border-slate-200 bg-white p-4 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md sm:p-5">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-        <div>
+        <div className="min-w-0">
           <div className="flex items-center gap-2 text-sm text-slate-500">
             <Package className="h-4 w-4" />
-            <span>{order.orderNumber}</span>
+            <span className="break-all">{order.orderNumber}</span>
           </div>
-          <h3 className="mt-3 text-lg font-semibold text-slate-900">{order.product.name}</h3>
-          <p className="mt-2 text-sm text-slate-600">{order.organization}</p>
+          <h3 className="mt-3 break-words text-lg font-semibold text-slate-900">{order.product.name}</h3>
+          <p className="mt-2 break-words text-sm text-slate-600">{order.organization}</p>
         </div>
-        <div className="flex items-center gap-3">
+        <div className="flex flex-wrap items-center gap-2 sm:shrink-0 sm:gap-3">
           <StatusBadge status={order.status} />
           <span className="rounded-full bg-surface px-3 py-1 text-xs font-medium text-slate-600">{order.product.totalBoxes} коробок</span>
         </div>
@@ -44,7 +44,7 @@ export default function OrderCard({ order, actionLabel, onAction }: OrderCardPro
       {onAction && actionLabel && (
         <button
           onClick={onAction}
-          className="mt-5 inline-flex items-center gap-2 rounded-3xl bg-[var(--primary)] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#163926]"
+        className="mt-5 inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-2xl bg-[var(--primary)] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#163926] sm:w-auto"
         >
           {actionLabel} <ArrowRight className="h-4 w-4" />
         </button>

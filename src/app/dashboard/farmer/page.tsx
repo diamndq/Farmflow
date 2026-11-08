@@ -16,13 +16,13 @@ export default function FarmerDashboardPage() {
 
   return (
     <div className="space-y-8">
-      <section className="rounded-[2rem] bg-white p-6 shadow-sm">
+      <section className="rounded-3xl bg-white p-4 shadow-sm sm:rounded-[2rem] sm:p-6">
         <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <p className="text-sm font-semibold uppercase tracking-[0.24em] text-[var(--accent)]">Фермер</p>
-            <h1 className="mt-2 text-3xl font-semibold text-slate-900">Мои текущие заказы</h1>
+            <h1 className="mt-2 text-2xl font-semibold text-slate-900 sm:text-3xl">Мои текущие заказы</h1>
           </div>
-          <button onClick={() => router.push("/dashboard/farmer/receive")} className="inline-flex items-center rounded-3xl bg-[var(--primary)] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#163926]">
+          <button onClick={() => router.push("/dashboard/farmer/receive")} className="inline-flex min-h-12 w-full items-center justify-center rounded-2xl bg-[var(--primary)] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#163926] sm:w-auto">
             Приёмка заказов
           </button>
         </div>

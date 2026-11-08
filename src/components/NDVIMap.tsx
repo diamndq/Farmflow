@@ -10,7 +10,7 @@ export default function NDVIMap() {
   const sentinelHubUrl = "https://services.sentinel-hub.com/ogc/wms/ae19543e-727c-4734-927a-cc372ca6201b";
 
   return (
-    <div className="h-[600px] w-full border-2 border-slate-200 rounded-2xl overflow-hidden shadow-inner">
+    <div className="h-[65dvh] min-h-96 w-full overflow-hidden rounded-2xl border-2 border-slate-200 shadow-inner sm:h-[600px]">
       <MapContainer 
         center={[54.8667, 69.15]} // Координаты полей (можно поменять)
         zoom={11} 

@@ -16,7 +16,7 @@ export default function FarmerHistoryPage() {
 
   return (
     <div className="space-y-8">
-      <section className="mx-4 rounded-[2rem] bg-white p-6 shadow-sm md:mx-0">
+      <section className="rounded-3xl bg-white p-4 shadow-sm sm:rounded-[2rem] sm:p-6">
         <div className="mb-6">
           <p className="text-sm font-semibold uppercase tracking-[0.24em] text-[var(--accent)]">История</p>
           <h1 className="mt-2 text-2xl font-semibold text-slate-900 md:text-3xl">Архив партий</h1>
@@ -24,11 +24,11 @@ export default function FarmerHistoryPage() {
 
         <div className="space-y-4 md:hidden">
           {historyOrders.map((order) => (
-            <div key={order.id} className="rounded-3xl border border-slate-200 bg-white p-4 shadow-sm">
+            <div key={order.id} className="min-w-0 rounded-2xl border border-slate-200 bg-white p-3 shadow-sm sm:rounded-3xl sm:p-4">
               <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                 <div>
-                  <p className="text-sm font-semibold text-slate-900">{order.orderNumber}</p>
-                  <p className="text-sm text-slate-500">{order.product.name}</p>
+                  <p className="break-all text-sm font-semibold text-slate-900">{order.orderNumber}</p>
+                  <p className="break-words text-sm text-slate-500">{order.product.name}</p>
                 </div>
                 <div className="flex items-center gap-2">
                   <span className="text-sm text-slate-500">{formatDate(order.createdAt)}</span>
