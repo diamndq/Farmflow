@@ -5,8 +5,12 @@ import { OrdersProvider } from "../context/OrdersContext";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "FarmFlow",
-  description: "FarmFlow — аграрная логистика Северного Казахстана",
+  title: {
+    default: "FarmFlow — агрологистика от заказа до применения",
+    template: "%s | FarmFlow",
+  },
+  description:
+    "Пилотный проект цифрового контроля движения субсидируемых агротоваров в Северо-Казахстанской области.",
 };
 
 export default function RootLayout({
